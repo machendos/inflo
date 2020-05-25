@@ -1,0 +1,16 @@
+{
+  "tockens": {
+
+    "KEY_WORD": ["import", "fun"],
+    "DELIM": "[(){},']",
+    "IDENTIFIRE": "[A-Za-z_][A-Za-z_-]",
+    "STRING": "'[A-Za-z0-9!#$%&()?+/-//*=^:|@~><\\]*'",
+    "NUMBER": "([1-9][0-9]*/. | [1-9]) [0-9]*"
+
+  },
+
+  "configs": { 
+    "spaces_process": "none"
+  }
+
+}
