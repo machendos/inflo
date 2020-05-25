@@ -72,9 +72,24 @@ class Lexer {
           done: true
         };
 
+        // TODO: move throw error to separate module
+
+
+        console.log(__dirname);
+        console.log('Line: ' + lexer.currLine + '\n');
+        console.log(lexer.lines[lexer.currLine]);
+        console.log(' '.repeat(lexer.currColumn) + '^');
+        console.log(
+          '\x1b[31m\x1b[1m LexicalError:\x1b[0m Unexpected symbol:' +
+          lexer.source[0] +
+          '\n\n'
+        );
+
+        lexer.currColumn++;
         lexer.source = lexer.source.slice(1);
         return {
-          value: 'TERMINAl'
+          value: 'ERROR',
+          done: lexer.config.configs.on_error !== 'continue'
         };
 
       }
