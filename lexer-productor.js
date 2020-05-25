@@ -10,15 +10,11 @@ class Lexer {
   }
 
   build() {
-    Object.entries(this.config.tockens)
-      .forEach(([className, toketSpecification]) => {
-        if (typeof toketSpecification === 'string') {
-          this.regulars.push([className, toketSpecification]);
-        } else {
-          this.fullTockens
-            .push(...toketSpecification.map(token => [className, token]));
-        }
-      });
+
+    this.tockens = Object.entries(this.config.tockens)
+      .sort(([class1, token1], [class2, token2]) =>
+        (typeof token2 === 'string' ? -1 : 1)
+      );
     return this;
   }
 
@@ -55,26 +51,7 @@ class Lexer {
 
         lexer.skipSpaces();
 
-        console.log(lexer.currColumn);
-
-        for (const [className, token] of lexer.fullTockens) {
-
-          const mathed = lexer.source.match(new RegExp('^' + token));
-          if (mathed && mathed[0]) {
-            lexer.currColumn += token.length;
-            lexer.source = lexer.source.slice(token.length);
-            return {
-              done: false,
-              value: {
-                class: className,
-                value: token,
-              }
-            };
-          }
-
-        }
-
-        for (const [className, toketSpecification] of lexer.regulars) {
+        for (const [className, toketSpecification] of lexer.tockens) {
 
           const mathed = lexer.source
             .match(new RegExp('^' + toketSpecification));
