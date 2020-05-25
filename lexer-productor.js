@@ -19,25 +19,28 @@ class Lexer {
             .push(...toketSpecification.map(token => [className, token]));
         }
       });
+    return this;
   }
 
   apply(source) {
     this.source = source;
-    this.lines = source.split('/n');
+    this.lines = source.split('\n');
     if (this.source[0]) {
-      this.currSymbol = source[0];
-      this.currColumn = 1;
-      this.currLine = 1;
+      this.currColumn = 0;
+      this.currLine = 0;
     }
+    return this;
   }
 
   skipSpaces() {
-    if (this.currSymbol === ' ') {
-      this.currSymbol = this.source[++this.currColumn];
+    if (this.source[0] === ' ') {
+      this.currColumn++;
+      this.source = this.source.slice(1);
       this.skipSpaces();
-    } else if (this.currSymbol === '/n') {
-      this.currSymbol = this.source[++this.currColumn];
+    } else if (this.source[0] === '\n') {
       this.currLine++;
+      this.currColumn = 0;
+      this.source = this.source.slice(1);
       this.skipSpaces();
     }
   }
@@ -52,7 +55,7 @@ class Lexer {
 
         lexer.skipSpaces();
 
-        console.log(lexer.source);
+        console.log(lexer.currColumn);
 
         for (const [className, token] of lexer.fullTockens) {
 
@@ -93,7 +96,9 @@ class Lexer {
         };
 
         lexer.source = lexer.source.slice(1);
-        return { value: 'TERMINAL' };
+        return {
+          value: 'TERMINAl'
+        };
 
       }
     };
