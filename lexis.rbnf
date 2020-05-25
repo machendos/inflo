@@ -1,0 +1,26 @@
+program               => imports_group? statements_group?
+
+imports_group         => import | import imports_group
+import                => "import" string
+
+statements_group      => statement | statement statements_group
+statement             => function_declaration | function_call
+function_declaration  => "(" "fun" "(" identifier* ")" function_call ")"
+function_call         => "(" identifier term* ")"
+term                  => literal | function_call | identifier
+
+literal               => number | string | list
+identifier            => [a-zA-Z/-_] [a-zA-Z/-0-9]*
+list                  => "{" term* "}"
+
+string                => "'" (string_symbol | string_symbol string) "'"
+string_symbol         => digit | letter | special_string_symbol
+letter                => lover_letter | upper_leter
+lover_letter          => [a-z]
+upper_letter          => [A-Z]
+special_string_symbol => [!#$%&()?+/-//*=^:|\~><]
+
+number                => non_zero_digit | digit*
+digit                 => zero | non_zero_digit
+non_zero_digit        => [1-9]
+zero                  => "0"
