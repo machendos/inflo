@@ -1,11 +1,11 @@
 {
   "tockens": {
 
-    "KEY_WORD": ["import", "fun"],
-    "DELIM": "[(){},']",
-    "IDENTIFIRE": "[A-Za-z_][A-Za-z_-]",
-    "STRING": "'[A-Za-z0-9!#$%&()?+/-//*=^:|@~><\\]*'",
-    "NUMBER": "([1-9][0-9]*/. | [1-9]) [0-9]*"
+    "KEY_WORD": ["importas", "fun"],
+    "DELIM": "[(){},[\\]]",
+    "IDENTIFIRE": "[A-Za-z_][A-Za-z_-]*",
+    "STRING": "'[A-Za-z0-9!@#$%^&?*()_\\-+=/~\\|[\\]{}]*'",
+    "NUMBER": "([1-9][0-9]*\\.|[1-9])[0-9]+"
 
   },
 
