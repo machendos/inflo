@@ -10,7 +10,7 @@ function_call         => "(" identifier term* ")"
 term                  => literal | function_call | identifier
 
 literal               => number | string | list
-identifier            => [a-zA-Z/-_] [a-zA-Z/-0-9]*
+identifier            => [a-zA-Z_] [a-zA-Z/-0-9]*
 list                  => "{" term* "}"
 
 string                => "'" (string_symbol | string_symbol string) "'"
@@ -18,7 +18,7 @@ string_symbol         => digit | letter | special_string_symbol
 letter                => lover_letter | upper_leter
 lover_letter          => [a-z]
 upper_letter          => [A-Z]
-special_string_symbol => [!#$%&()?+/-//*=^:|\~><]
+special_string_symbol => [!#$%&()?+/-//*=^:|\@~><]
 
 number                => non_zero_digit | digit*
 digit                 => zero | non_zero_digit
