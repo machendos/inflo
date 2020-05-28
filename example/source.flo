@@ -1,0 +1,13 @@
+import './sub.flo'
+
+(define rand (random))
+(fun (flip p) (less rand p))
+
+(output (M list))
+
+(output rand)
+
+
+(output (flip 0.2))
+(output (flip 0.8))
+
